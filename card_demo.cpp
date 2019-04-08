@@ -3,14 +3,29 @@
 #include <iostream>    // Provides cout and cin
 #include <cstdlib>     // Provides EXIT_SUCCESS
 #include "card.h"
-#include "player.h"
-#include "deck.h"
+
+//#include "player.h"
+//#include "deck.h"
 
 using namespace std;
 
 
 // PROTOTYPES for functions used by this demonstration program:
-void dealHand(Deck &d, Player &p, int numCards);
+
+
+int main(){
+	Card::Suit s = Card::spades;
+	Card c1(11, s);
+	Card c2(1, Card::hearts);
+	Card c3;
+	
+	cout << c3.toString() << endl;
+	
+}
+
+
+
+/* void dealHand(Deck &d, Player &p, int numCards);
 
 
 
@@ -40,7 +55,7 @@ void dealHand(Deck &d, Player &p, int numCards)
 {
    for (int i=0; i < numCards; i++)
       p.addCard(d.dealCard());
-}
+} */
    
 
 
