@@ -13,17 +13,17 @@ using namespace std;
 // PROTOTYPES for functions used by this demonstration program:
 
 
-int main(){
-	Deck t;
-	Player p("Mithilesh");
-	p.addCard(t.dealCard());
-	p.chooseCardFromHand();
+// int main(){
+	// Deck t;
+	// Player p("Mithilesh");
+	// p.addCard(t.dealCard());
+	// p.chooseCardFromHand();
 	
-}
+// }
 
 
 
-/* void dealHand(Deck &d, Player &p, int numCards);
+void dealHand(Deck &d, Player &p, int numCards);
 
 
 
@@ -53,7 +53,7 @@ void dealHand(Deck &d, Player &p, int numCards)
 {
    for (int i=0; i < numCards; i++)
       p.addCard(d.dealCard());
-} */
+}
    
 
 

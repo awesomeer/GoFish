@@ -12,6 +12,7 @@ Deck::Deck(){
 			Card add(i, (Card::Suit)s);
 			myCards[myIndex] = add;
 		}
+		cout << (Card::Suit)s << endl;
 	}
 	myIndex = 0;
 }
@@ -30,8 +31,9 @@ void Deck::shuffle(){
 }
 
 Card Deck::dealCard(){
-	if(size() != 0)
+	if(size() != 0){
 		return myCards[myIndex++];
+	}
 }
 
 int Deck::size() const{

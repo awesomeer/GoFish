@@ -50,7 +50,11 @@ Card Player::removeCardFromHand(Card c){
 }
 
 string Player::showHand() const{
-	return "";
+	string s = "";
+	for(Card c : myHand){
+		s += c.toString() + " ";
+	}
+	return s;
 }
 
 string Player::showBooks() const{
