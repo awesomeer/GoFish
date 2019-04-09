@@ -5,7 +5,7 @@
 #include "card.h"
 
 //#include "player.h"
-//#include "deck.h"
+#include "deck.h"
 
 using namespace std;
 
@@ -14,12 +14,7 @@ using namespace std;
 
 
 int main(){
-	Card::Suit s = Card::spades;
-	Card c1(11, s);
-	Card c2(1, Card::hearts);
-	Card c3;
-	
-	cout << c3.toString() << endl;
+	Deck t;
 	
 }
 
