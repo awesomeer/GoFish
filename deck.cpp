@@ -6,19 +6,30 @@ Deck::Deck(){
 	srand(time(0));
 	
 	myIndex = 0;
-	Card::Suit s;
-	for(int s = Card::spades; s <= Card::clubs; s++){
-		for(int i = 1; i <= 13; i++){
-			Card add(i, (Card::Suit)s);
-			myCards[myIndex] = add;
-		}
-		cout << (Card::Suit)s << endl;
+	for(int i = 1; i <= 13; i++){
+		Card add(i, Card::spades);
+		myCards[myIndex] = add;
+		myIndex++;
+	}
+	for(int i = 1; i <= 13; i++){
+		Card add(i, Card::hearts);
+		myCards[myIndex] = add;
+		myIndex++;
+	}
+	for(int i = 1; i <= 13; i++){
+		Card add(i, Card::diamonds);
+		myCards[myIndex] = add;
+		myIndex++;
+	}
+	for(int i = 1; i <= 13; i++){
+		Card add(i, Card::clubs);
+		myCards[myIndex] = add;
+		myIndex++;
 	}
 	myIndex = 0;
 }
 
 void Deck::shuffle(){
-	srand(time(NULL));
 	for(int i = 0; i < 200; i++){
 		Card temp;
 		int beg = rand() % 52;
