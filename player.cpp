@@ -1,11 +1,12 @@
 #include "player.h"
 #include <string>
 #include <vector>
+#include <iostream>
+#include <ctime>
 
 using namespace std;
 
 Player::Player(){
-	
 	myName = "";
 }
 
@@ -13,12 +14,14 @@ void Player::addCard(Card c){
 	myHand.push_back(c);
 }
 
-void bookCards(Card c1, Card c2){
+void Player::bookCards(Card c1, Card c2){
 	myBook.push_back(c1);
 	myBook.push_back(c2);
 }
 
 Card Player::chooseCardFromHand() const{
+	srand(time(NULL));
+	
 	int index = rand() % getHandSize();
 	Card ret = myHand.at(index);
 	cout << "Do you have a " << ret.rankString(ret.getRank()) << endl;
@@ -43,14 +46,15 @@ Card Player::removeCardFromHand(Card c){
 		}
 		index++;
 	}
+	return c;
 }
 
 string Player::showHand() const{
-	
+	return "";
 }
 
 string Player::showBooks() const{
-	
+	return "";
 }
 
 int Player::getHandSize() const{

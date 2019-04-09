@@ -17,6 +17,7 @@ Deck::Deck(){
 }
 
 void Deck::shuffle(){
+	srand(time(NULL));
 	for(int i = 0; i < 200; i++){
 		Card temp;
 		int beg = rand() % 52;
@@ -31,7 +32,6 @@ void Deck::shuffle(){
 Card Deck::dealCard(){
 	if(size() != 0)
 		return myCards[myIndex++];
-	return NULL;
 }
 
 int Deck::size() const{
