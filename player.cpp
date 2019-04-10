@@ -19,6 +19,19 @@ void Player::bookCards(Card c1, Card c2){
 	myBook.push_back(c2);
 }
 
+bool Player::rankInHand(Card c) const{
+	for(Card i : myHand){
+		if(i.getRank() == c.getRank()){
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+
+
+
 Card Player::chooseCardFromHand() const{
 	srand(time(NULL));
 	
@@ -30,7 +43,7 @@ Card Player::chooseCardFromHand() const{
 
 bool Player::cardInHand(Card c) const{
 	for(Card i : myHand){
-		if(c.getRank() == i.getRank())
+		if(c == i)
 			return true;
 	}
 	
@@ -40,13 +53,14 @@ bool Player::cardInHand(Card c) const{
 Card Player::removeCardFromHand(Card c){
 	int index = 0;
 	for(Card i : myHand){
-		if(c.getRank() == i.getRank()){
+		if(c == i){
 			Card re = myHand.at(index);
 			myHand.erase(myHand.begin()+index);
 			return re;
 		}
 		index++;
 	}
+	
 	return c;
 }
 

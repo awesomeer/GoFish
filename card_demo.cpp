@@ -45,9 +45,27 @@ int main( )
     cout << p2.getName() <<" has : " << p2.showHand() << endl;
 	
 	while(1){
+		// Card play = p1.chooseCardFromHand();
+		// if(p2.cardInHand(play)){
+			// p1.addCard(p2.removeCardFromHand(play));
+		// }
+		// else{
+			// p1.addCard(d.dealCard());
+		// }
+		
+		// play = p2.chooseCardFromHand();
+		// if(p1.cardInHand(play)){
+			// p2.addCard(p1.removeCardFromHand(play));
+		// }
+		// else{
+			// p2.addCard(d.dealCard());
+		// }
+		
 		Card play = p1.chooseCardFromHand();
 		if(p2.cardInHand(play)){
-			p1.addCard(p2.removeCardFromHand(play));
+			while(p2.cardInHand(play)){
+				p1.addCard(p2.removeCardFromHand(play));
+			}
 		}
 		else{
 			p1.addCard(d.dealCard());
@@ -55,7 +73,9 @@ int main( )
 		
 		play = p2.chooseCardFromHand();
 		if(p1.cardInHand(play)){
-			p2.addCard(p1.removeCardFromHand(play));
+			while(p1.cardInHand(play)){
+				p2.addCard(p1.removeCardFromHand(play));
+			}
 		}
 		else{
 			p2.addCard(d.dealCard());
