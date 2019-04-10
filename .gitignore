@@ -4,3 +4,4 @@
 *.exe
 test.exe
 card.o
+*.o
