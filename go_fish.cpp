@@ -43,9 +43,9 @@ int main( )
 	
 	while(1){
 		
-		turn(p1, p2);
+		while(turn(p1, p2)){}
 		system("PAUSE");
-		turn(p2, p1);
+		while(turn(p2, p1)){}
 		system("PAUSE");
 		
 	}
