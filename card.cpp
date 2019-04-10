@@ -41,6 +41,10 @@ string Card::suitString(Suit s) const{
 	}
 }
 
+string Card::rankString() const{
+	return rankString(myRank);
+}
+
 string Card::rankString(int r) const{
 	switch(r){
 		case 1:

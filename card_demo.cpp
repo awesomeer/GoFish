@@ -21,10 +21,10 @@ using namespace std;
 	
 // }
 
-
+Deck d;
 
 void dealHand(Deck &d, Player &p, int numCards);
-
+void turn(Player &p1, Player &p2);
 
 
 
@@ -35,77 +35,34 @@ int main( )
     Player p1("Joe");
     Player p2("Jane");
     
-    Deck d;  //create a deck of cards
+      //create a deck of cards
     d.shuffle();
     
     dealHand(d, p1, numCards);
     dealHand(d, p2, numCards);
        
-    cout << p1.getName() <<" has : " << p1.showHand() << endl;
-    cout << p2.getName() <<" has : " << p2.showHand() << endl;
+    //cout << p1.getName() <<" has : " << p1.showHand() << endl;
+    //cout << p2.getName() <<" has : " << p2.showHand() << endl;
 	
-	Card c1;
-	Card c2;
+	// Card c1;
+	// Card c2;
 	
-	cout << p1.checkHandForPair(c1, c2) << endl;
-	cout << c1.toString() << " " << c2.toString() << endl;
-	
-	cout << p1.showBooks() << endl;
-	cout << p1.showHand() << endl;
-	
-	// while(1){
-		
-		// cout << p1.getName() <<" has : " << p1.showHand() << endl;
-		// cout << p2.getName() <<" has : " << p2.showHand() << endl;
-		
-		// // Card play = p1.chooseCardFromHand();
-		// // if(p2.cardInHand(play)){
-			// // p1.addCard(p2.removeCardFromHand(play));
-		// // }
-		// // else{
-			// // p1.addCard(d.dealCard());
-		// // }
-		
-		// // play = p2.chooseCardFromHand();
-		// // if(p1.cardInHand(play)){
-			// // p2.addCard(p1.removeCardFromHand(play));
-		// // }
-		// // else{
-			// // p2.addCard(d.dealCard());
-		// // }
-		
-		// Card play = p1.chooseCardFromHand();
-		
-		// if(p2.rankInHand(play)){
-			// for(int i = 0; i < 4; i++){
-				// Card test(play.getRank(), (Card::Suit) i);
-				// if(p2.cardInHand(test)){
-					// p1.addCard(p2.removeCardFromHand(test));
-				// }
-			// }
-		// }
-		// else{
-			// p1.addCard(d.dealCard());
-		// }
-		
-		// play = p2.chooseCardFromHand();
-		
-		// if(p1.rankInHand(play)){
-			// for(int i = 0; i < 4; i++){
-				// Card test(play.getRank(), (Card::Suit) i);
-				// if(p1.cardInHand(test)){
-					// p2.addCard(p1.removeCardFromHand(test));
-				// }
-			// }
-		// }
-		// else{
-			// p2.addCard(d.dealCard());
-		// }
-		
-		
-		// system("PAUSE");
-		
+	// if(p1.checkHandForPair(c1, c2)){
+		// p1.bookCards(c1,c2);
 	// }
+	// cout << c1.toString() << " " << c2.toString() << endl;
+	
+	// cout << p1.showBooks() << endl;
+	// cout << p1.showHand() << endl;
+	
+	while(1){
+		
+		turn(p1, p2);
+		system("PAUSE");
+		turn(p2, p1);
+		system("PAUSE");
+		
+	}
     
     return EXIT_SUCCESS;  
 }
@@ -118,5 +75,35 @@ void dealHand(Deck &d, Player &p, int numCards)
       p.addCard(d.dealCard());
 }
    
-
+void turn(Player &p1, Player &p2){
+	Card play;
+	Card check1;
+	Card check2;
+	
+		cout << p2.getName() <<" has " << p2.showHand() << endl;
+		
+		play = p1.chooseCardFromHand();
+		
+		if(p2.rankInHand(play)){
+			cout << p2.getName() << ": Yes I have a " << play.rankString() << endl;
+			for(int i = 0; i < 4; i++){
+				Card test(play.getRank(), (Card::Suit) i);
+				if(p2.cardInHand(test)){
+					p1.addCard(p2.removeCardFromHand(test));
+				}
+			}
+		}
+		else{
+			cout << p2.getName() << ": Go Fish" << endl;
+			Card add = d.dealCard();
+			p1.addCard(add);
+			cout << p1.getName() << " Draws a " << add.toString() << endl;
+		}
+		while(p1.checkHandForPair(check1, check2)){
+			p1.bookCards(check1, check2);
+			cout << p1.getName() << "books cards " << check1.toString() << " " << check2.toString() << endl;
+		}
+		
+		cout << endl;
+}
 

@@ -43,6 +43,7 @@ class Card
     int  getRank()                 const;  // return rank, 1..13
     string suitString(Suit s)      const;  // return "s", "h",...
     
+	string rankString()			   const;
     string rankString(int r)       const;  // return "A", "2", ..."Q"  
     
     
