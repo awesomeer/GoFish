@@ -43,6 +43,30 @@ int main( )
        
     cout << p1.getName() <<" has : " << p1.showHand() << endl;
     cout << p2.getName() <<" has : " << p2.showHand() << endl;
+	
+	while(1){
+		Card play = p1.chooseCardFromHand();
+		if(p2.cardInHand(play)){
+			p1.addCard(p2.removeCardFromHand(play));
+		}
+		else{
+			p1.addCard(d.dealCard());
+		}
+		
+		play = p2.chooseCardFromHand();
+		if(p1.cardInHand(play)){
+			p2.addCard(p1.removeCardFromHand(play));
+		}
+		else{
+			p2.addCard(d.dealCard());
+		}
+		
+		cout << p1.getName() <<" has : " << p1.showHand() << endl;
+		cout << p2.getName() <<" has : " << p2.showHand() << endl;
+		
+		system("PAUSE");
+		
+	}
     
     return EXIT_SUCCESS;  
 }

@@ -24,13 +24,13 @@ Card Player::chooseCardFromHand() const{
 	
 	int index = rand() % getHandSize();
 	Card ret = myHand.at(index);
-	cout << "Do you have a " << ret.rankString(ret.getRank()) << endl;
+	cout << myName << ": Do you have a " << ret.rankString(ret.getRank()) << endl;
 	return ret;
 }
 
 bool Player::cardInHand(Card c) const{
 	for(Card i : myHand){
-		if(c == i)
+		if(c.getRank() == i.getRank())
 			return true;
 	}
 	
@@ -40,9 +40,10 @@ bool Player::cardInHand(Card c) const{
 Card Player::removeCardFromHand(Card c){
 	int index = 0;
 	for(Card i : myHand){
-		if(c == i){
+		if(c.getRank() == i.getRank()){
+			Card re = myHand.at(index);
 			myHand.erase(myHand.begin()+index);
-			return c;
+			return re;
 		}
 		index++;
 	}
