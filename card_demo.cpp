@@ -44,49 +44,68 @@ int main( )
     cout << p1.getName() <<" has : " << p1.showHand() << endl;
     cout << p2.getName() <<" has : " << p2.showHand() << endl;
 	
-	while(1){
+	Card c1;
+	Card c2;
+	
+	cout << p1.checkHandForPair(c1, c2) << endl;
+	cout << c1.toString() << " " << c2.toString() << endl;
+	
+	cout << p1.showBooks() << endl;
+	cout << p1.showHand() << endl;
+	
+	// while(1){
+		
+		// cout << p1.getName() <<" has : " << p1.showHand() << endl;
+		// cout << p2.getName() <<" has : " << p2.showHand() << endl;
+		
+		// // Card play = p1.chooseCardFromHand();
+		// // if(p2.cardInHand(play)){
+			// // p1.addCard(p2.removeCardFromHand(play));
+		// // }
+		// // else{
+			// // p1.addCard(d.dealCard());
+		// // }
+		
+		// // play = p2.chooseCardFromHand();
+		// // if(p1.cardInHand(play)){
+			// // p2.addCard(p1.removeCardFromHand(play));
+		// // }
+		// // else{
+			// // p2.addCard(d.dealCard());
+		// // }
+		
 		// Card play = p1.chooseCardFromHand();
-		// if(p2.cardInHand(play)){
-			// p1.addCard(p2.removeCardFromHand(play));
+		
+		// if(p2.rankInHand(play)){
+			// for(int i = 0; i < 4; i++){
+				// Card test(play.getRank(), (Card::Suit) i);
+				// if(p2.cardInHand(test)){
+					// p1.addCard(p2.removeCardFromHand(test));
+				// }
+			// }
 		// }
 		// else{
 			// p1.addCard(d.dealCard());
 		// }
 		
 		// play = p2.chooseCardFromHand();
-		// if(p1.cardInHand(play)){
-			// p2.addCard(p1.removeCardFromHand(play));
+		
+		// if(p1.rankInHand(play)){
+			// for(int i = 0; i < 4; i++){
+				// Card test(play.getRank(), (Card::Suit) i);
+				// if(p1.cardInHand(test)){
+					// p2.addCard(p1.removeCardFromHand(test));
+				// }
+			// }
 		// }
 		// else{
 			// p2.addCard(d.dealCard());
 		// }
 		
-		Card play = p1.chooseCardFromHand();
-		if(p2.cardInHand(play)){
-			while(p2.cardInHand(play)){
-				p1.addCard(p2.removeCardFromHand(play));
-			}
-		}
-		else{
-			p1.addCard(d.dealCard());
-		}
 		
-		play = p2.chooseCardFromHand();
-		if(p1.cardInHand(play)){
-			while(p1.cardInHand(play)){
-				p2.addCard(p1.removeCardFromHand(play));
-			}
-		}
-		else{
-			p2.addCard(d.dealCard());
-		}
+		// system("PAUSE");
 		
-		cout << p1.getName() <<" has : " << p1.showHand() << endl;
-		cout << p2.getName() <<" has : " << p2.showHand() << endl;
-		
-		system("PAUSE");
-		
-	}
+	// }
     
     return EXIT_SUCCESS;  
 }
