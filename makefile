@@ -1,5 +1,5 @@
-GoFish: card_demo.cpp card.o deck.o player.o
-	g++ -g -o GoFish card_demo.cpp card.o deck.o player.o
+GoFish: go_fish.cpp card.o deck.o player.o
+	g++ -g -o GoFish go_fish.cpp card.o deck.o player.o
 card.o: card.cpp
 	g++ -g -c card.cpp
 deck.o: deck.cpp
