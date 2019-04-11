@@ -26,6 +26,7 @@ Deck d;
 void dealHand(Deck &d, Player &p, int numCards);
 bool turn(Player &p1, Player &p2);
 void checkForBooks(Player &p1);
+void checkWinPlayer(Player &p1);
 
 int main( )
 {
@@ -43,9 +44,9 @@ int main( )
 	while(1){
 		
 		while(turn(p1, p2)){}
-		system("PAUSE");
+		//system("PAUSE");
 		while(turn(p2, p1)){}
-		system("PAUSE");
+		//system("PAUSE");
 		
 	}
     
@@ -86,6 +87,7 @@ bool turn(Player &p1, Player &p2){
 	}
 	checkForBooks(p1);
 	cout << endl;
+	checkWinPlayer(p1);
 	return success;
 }
 
@@ -94,5 +96,12 @@ void checkForBooks(Player &p1){
 	while(p1.checkHandForPair(check1, check2)){
 			p1.bookCards(check1, check2);
 			cout << p1.getName() << " books cards " << check1.toString() << " " << check2.toString() << endl;
+	}
+}
+
+void checkWinPlayer(Player &p1){
+	if(p1.getBookSize() > 13){
+		cout << "Player: " << p1.getName() << " won with " << p1.getBookSize() << " books" << endl;
+		exit(0);
 	}
 }
