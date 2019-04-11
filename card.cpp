@@ -67,4 +67,6 @@ bool Card::operator != (const Card& rhs) const{
 	return !(*this == rhs);
 }
 
-
+ostream& operator << (ostream& out, const Card& c){
+	return out << c.toString();
+}

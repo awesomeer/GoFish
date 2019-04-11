@@ -39,6 +39,7 @@ Card Player::chooseCardFromHand() const{
 	
 	if(getHandSize() == 0){
 		Card ret((rand() % 13) + 1, Card::spades);
+		cout << myName << ": Do you have a " << ret.rankString() << endl;
 		return ret;
 	}
 	

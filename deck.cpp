@@ -6,7 +6,15 @@ Deck::Deck(){
 	srand(time(0));
 	
 	myIndex = 0;
-	for(int i = 1; i <= 13; i++){
+	for(int i = 0; i < 4; i++){
+		for(int j = 1; j <= 13; j++){
+			Card add(j, Card::Suit(i));
+			myCards[i*13+j-1] = add;
+			
+		}
+	}
+	
+	/* for(int i = 1; i <= 13; i++){
 		Card add(i, Card::spades);
 		myCards[myIndex] = add;
 		myIndex++;
@@ -25,7 +33,7 @@ Deck::Deck(){
 		Card add(i, Card::clubs);
 		myCards[myIndex] = add;
 		myIndex++;
-	}
+	} */
 	myIndex = 0;
 }
 

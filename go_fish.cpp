@@ -15,7 +15,8 @@ using namespace std;
 void dealHand(Deck &d, Player &p, int numCards);
 bool turn(Player &p1, Player &p2);
 void checkForBooks(Player &p1);
-void checkWinPlayer(Player &p1);
+void checkWinPlayer(Player &p1, Player &p2);
+void checkTie(Player &p1, Player &p2);
 
 Deck d;
 
@@ -37,16 +38,12 @@ int main( )
 		if(d.size() == 0){
 			cout << "Size is 0" << endl;
 		}
-		if(d.size() == 0 && p1.getBookSize() == p2.getBookSize()){
-			cout << "Game ended in a tie" << endl;
-			exit(0);
-		}
+		
 		while(turn(p1, p2)){}
 		//system("PAUSE");
-		if(d.size() == 0 && p1.getBookSize() == p2.getBookSize()){
-			cout << "Game ended in a tie" << endl;
-			exit(0);
-		}
+		
+		
+		
 		while(turn(p2, p1)){}
 		//system("PAUSE");
 		
@@ -66,21 +63,39 @@ void dealHand(Deck &d, Player &p, int numCards)
 bool turn(Player &p1, Player &p2){
 	Card play;
 	bool success;
+	
+	cout << p1.getName() <<" has " << p1.showHand() << endl;
 	cout << p2.getName() <<" has " << p2.showHand() << endl;
 	
-	play = p1.chooseCardFromHand();
-		
-	if(p2.rankInHand(play)){
-		cout << p2.getName() << ": Yes I have a " << play.rankString() << endl;
-		for(int i = 0; i < 4; i++){
-			Card test(play.getRank(), (Card::Suit) i);
-			if(p2.cardInHand(test)){
-				p1.addCard(p2.removeCardFromHand(test));
+	
+	if(p1.getHandSize() != 0){
+		play = p1.chooseCardFromHand();
+			
+		if(p2.rankInHand(play)){
+			cout << p2.getName() << ": Yes I have a " << play.rankString() << endl;
+			for(int i = 0; i < 4; i++){
+				Card test(play.getRank(), (Card::Suit) i);
+				if(p2.cardInHand(test)){
+					p1.addCard(p2.removeCardFromHand(test));
+				}
 			}
+			success = true;
 		}
-		success = true;
+		else{
+			cout << p2.getName() << ": Go Fish" << endl;
+			if(d.size()){
+				Card add = d.dealCard();
+				p1.addCard(add);
+				cout << p1.getName() << " draws a " << add.toString() << endl;
+			}
+			else{
+				cout << p1.getName() << " draws no cards" << endl;
+			}
+			success = false;
+		}
 	}
 	else{
+		cout << p1.getName() << " has no cards" << endl;
 		cout << p2.getName() << ": Go Fish" << endl;
 		if(d.size()){
 			Card add = d.dealCard();
@@ -94,7 +109,10 @@ bool turn(Player &p1, Player &p2){
 	}
 	checkForBooks(p1);
 	cout << endl;
-	checkWinPlayer(p1);
+	
+	checkWinPlayer(p1, p2);
+	checkTie(p1, p2);
+	
 	return success;
 }
 
@@ -106,10 +124,21 @@ void checkForBooks(Player &p1){
 	}
 }
 
-void checkWinPlayer(Player &p1){
+void checkWinPlayer(Player &p1, Player &p2){
 	if(p1.getBookSize()/2 > 13){
-		cout << "Player: " << p1.getName() << " won with " << p1.getBookSize()/2 << " books" << endl;
+		cout << "Player " << p1.getName() << " won with " << p1.getBookSize()/2 << " books" << endl;
+		cout << p1.getName() << ": " << p1.showBooks() << endl << endl;
+		cout << p2.getName() << ": " << p2.showBooks() << endl;
 		cout << "Deck Size: " << d.size() << endl;
+		exit(0);
+	}
+}
+
+void checkTie(Player &p1, Player &p2){
+	if(d.size() == 0 && p1.getHandSize() == 0 && p2.getHandSize() == 0){
+		cout << "Game ended in a tie" << endl;
+		cout << p1.getName() << ": " << p1.showBooks() << endl << endl;
+		cout << p2.getName() << ": " << p2.showBooks() << endl;
 		exit(0);
 	}
 }
