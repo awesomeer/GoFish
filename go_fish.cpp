@@ -12,21 +12,12 @@ using namespace std;
 
 // PROTOTYPES for functions used by this demonstration program:
 
-
-// int main(){
-	// Deck t;
-	// Player p("Mithilesh");
-	// p.addCard(t.dealCard());
-	// p.chooseCardFromHand();
-	
-// }
-
-Deck d;
-
 void dealHand(Deck &d, Player &p, int numCards);
 bool turn(Player &p1, Player &p2);
 void checkForBooks(Player &p1);
 void checkWinPlayer(Player &p1);
+
+Deck d;
 
 int main( )
 {
