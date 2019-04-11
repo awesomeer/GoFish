@@ -42,7 +42,7 @@ int main( )
     dealHand(d, p2, numCards);
 	
 	while(1){
-		
+		cout << d.size() << endl;
 		while(turn(p1, p2)){}
 		system("PAUSE");
 		while(turn(p2, p1)){}

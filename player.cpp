@@ -2,11 +2,11 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <ctime>
 
 using namespace std;
 
 Player::Player(){
+	srand(time(0));
 	myName = "";
 }
 
@@ -36,11 +36,15 @@ bool Player::rankInHand(Card c) const{
 
 
 Card Player::chooseCardFromHand() const{
-	srand(time(NULL));
+	
+	if(getHandSize() == 0){
+		Card ret((rand() % 13) + 1, Card::spades);
+		return ret;
+	}
 	
 	int index = rand() % getHandSize();
 	Card ret = myHand.at(index);
-	cout << myName << ": Do you have a " << ret.rankString(ret.getRank()) << endl;
+	cout << myName << ": Do you have a " << ret.rankString() << endl;
 	return ret;
 }
 
