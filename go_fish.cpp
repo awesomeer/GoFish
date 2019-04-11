@@ -27,7 +27,6 @@ void dealHand(Deck &d, Player &p, int numCards);
 bool turn(Player &p1, Player &p2);
 void checkForBooks(Player &p1);
 
-
 int main( )
 {
     int numCards = 5;
@@ -42,7 +41,7 @@ int main( )
     dealHand(d, p2, numCards);
 	
 	while(1){
-		cout << d.size() << endl;
+		
 		while(turn(p1, p2)){}
 		system("PAUSE");
 		while(turn(p2, p1)){}

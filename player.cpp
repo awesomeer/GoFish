@@ -72,6 +72,9 @@ Card Player::removeCardFromHand(Card c){
 }
 
 string Player::showHand() const{
+	if(getHandSize() == 0)
+		return "no cards";
+	
 	string s = "";
 	for(Card c : myHand){
 		s += c.toString() + " ";
