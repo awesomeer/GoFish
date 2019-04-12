@@ -41,16 +41,14 @@ bool Player::rankInHand(Card c) const{
 
 Card Player::chooseCardFromHand() const{
 	
-	if(getHandSize() == 0){
+	/* if(getHandSize() == 0){
 		Card ret((rand() % 13) + 1, Card::spades);
-		cout << myName << ": Do you have a " << ret.rankString() << endl;
 		return ret;
-	}
+	} */
 	
 	//selects a random card from myHand and returns it
 	int index = rand() % getHandSize();
 	Card ret = myHand.at(index);
-	cout << myName << ": Do you have a " << ret.rankString() << endl;
 	return ret;
 }
 
