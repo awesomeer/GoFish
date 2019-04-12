@@ -13,21 +13,23 @@ using namespace std;
 // PROTOTYPES for functions used by this demonstration program:
 
 void dealHand(Deck &d, Player &p, int numCards);
-bool turn(Player &p1, Player &p2);
+bool turn(Player &p1, Player &p2, Deck &d);
 void checkForBooks(Player &p1);
 void checkWinPlayer(Player &p1, Player &p2);
-void checkTie(Player &p1, Player &p2);
+void checkTie(Player &p1, Player &p2 ,Deck &d);
 
-Deck d;
+
 
 int main( )
 {
-    int numCards = 5;
+    int numCards = 7;
+	
     
     Player p1("Joe");
     Player p2("Jane");
     
-      //create a deck of cards
+    //create a deck of cards
+	Deck d;
     d.shuffle();
     
     dealHand(d, p1, numCards);
@@ -35,16 +37,13 @@ int main( )
 	
 	while(1){
 		
-		if(d.size() == 0){
-			cout << "Size is 0" << endl;
-		}
-		
-		while(turn(p1, p2)){}
+		//if turn returns true player1 goes again
+		while(turn(p1, p2, d)){}
 		//system("PAUSE");
 		
 		
 		
-		while(turn(p2, p1)){}
+		while(turn(p2, p1, d)){}
 		//system("PAUSE");
 		
 	}
@@ -56,23 +55,30 @@ int main( )
 
 void dealHand(Deck &d, Player &p, int numCards)
 {
+	//deals numCards to the player from the deck
    for (int i=0; i < numCards; i++)
       p.addCard(d.dealCard());
 }
    
-bool turn(Player &p1, Player &p2){
+bool turn(Player &p1, Player &p2, Deck &d){
 	Card play;
+	//success is true if player1 guessed right; false otherwise
 	bool success;
 	
+	//Shows the players hands before the turn starts
 	cout << p1.getName() <<" has " << p1.showHand() << endl;
 	cout << p2.getName() <<" has " << p2.showHand() << endl;
 	
-	
+	//If the players hand is empty they automatically draw a card from the deck
 	if(p1.getHandSize() != 0){
 		play = p1.chooseCardFromHand();
-			
+		
+		//If the player2 has the rank in hand they give all cards with the same rank to
+		//the other player
 		if(p2.rankInHand(play)){
 			cout << p2.getName() << ": Yes I have a " << play.rankString() << endl;
+			//For loop checks for the same rank with all suits
+			//and adds it to the player1's hand
 			for(int i = 0; i < 4; i++){
 				Card test(play.getRank(), (Card::Suit) i);
 				if(p2.cardInHand(test)){
@@ -82,6 +88,7 @@ bool turn(Player &p1, Player &p2){
 			success = true;
 		}
 		else{
+			//if the rank is not in hand player1 draws a card from the deck
 			cout << p2.getName() << ": Go Fish" << endl;
 			if(d.size()){
 				Card add = d.dealCard();
@@ -107,17 +114,19 @@ bool turn(Player &p1, Player &p2){
 		}
 		success = false;
 	}
+	//checks for books and pairs when the turn is over
 	checkForBooks(p1);
 	cout << endl;
-	
+	//checks for victory conditions and tie condition
 	checkWinPlayer(p1, p2);
-	checkTie(p1, p2);
+	checkTie(p1, p2, d);
 	
 	return success;
 }
 
 void checkForBooks(Player &p1){
 	Card check1, check2;
+	//While there are pairs in the players hands it keeps on booking cards
 	while(p1.checkHandForPair(check1, check2)){
 			p1.bookCards(check1, check2);
 			cout << p1.getName() << " books cards " << check1.toString() << " " << check2.toString() << endl;
@@ -125,16 +134,21 @@ void checkForBooks(Player &p1){
 }
 
 void checkWinPlayer(Player &p1, Player &p2){
+	//If the amount of pairs a player is greater than 13 than he/she won and the players books are outputed
+	//also exits the game
 	if(p1.getBookSize()/2 > 13){
 		cout << "Player " << p1.getName() << " won with " << p1.getBookSize()/2 << " books" << endl;
 		cout << p1.getName() << ": " << p1.showBooks() << endl << endl;
 		cout << p2.getName() << ": " << p2.showBooks() << endl;
-		cout << "Deck Size: " << d.size() << endl;
+		//cout << "Deck Size: " << d.size() << endl;
 		exit(0);
 	}
 }
 
-void checkTie(Player &p1, Player &p2){
+void checkTie(Player &p1, Player &p2, Deck &d){
+	//Checks if the deck has 0 cards and all the players have 0 cards in their hands
+	//therefore all the cards are booked equally and the game is a tie
+	//Outputs the player's books
 	if(d.size() == 0 && p1.getHandSize() == 0 && p2.getHandSize() == 0){
 		cout << "Game ended in a tie" << endl;
 		cout << p1.getName() << ": " << p1.showBooks() << endl << endl;
