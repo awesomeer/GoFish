@@ -1,5 +1,12 @@
 //Mithilesh Konakanchi mk38328
 
+
+
+/* small rule change
+	if the person being asked has no cards
+	then the person asking draws a card
+*/
+
 // FILE: card_demo.cpp
 // This is a small demonstration program showing how the Card and Deck classes are used.
 #include <iostream>    // Provides cout and cin
